@@ -25,6 +25,16 @@ def download_model_from_gdrive():
     gdown.download(url, destination, quiet=False)
     print("✅ Download complete.")
     return destination
+    
+def get_model():
+    global model
+    if 'model' not in globals():
+        print("🔄 Loading model into memory...")
+        model_path = download_model_from_gdrive()
+        model = load_model(model_path)
+        print("✅ Model loaded.")
+    return model
+
 
 
 
@@ -40,6 +50,7 @@ if not os.path.exists(app.config["UPLOAD_FOLDER"]):
 
 MODEL_PATH = download_model_from_gdrive()
 model = load_model(MODEL_PATH)
+
 
 
 
@@ -61,7 +72,9 @@ def uploaded_file(filename):
 # Function to fetch data from CSV
 def fetch_data_from_csv(class_name):
     # Update with the correct CSV file path
-    df = pd.read_csv(r"D:\PlantPedia\data\database.csv")
+    # df = pd.read_csv(r"D:\PlantPedia\data\database.csv")
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "data", "database.csv"))
+
 
     # Ensure column names match exactly
     if "Common Name" not in df.columns:
@@ -88,6 +101,7 @@ def upload_and_predict():
 
             # Process and predict the image
             preprocessed_image = preprocess_image(file_path)
+            # model = get_model()
             predictions = model.predict(preprocessed_image)
             predicted_class_ind = np.argmax(predictions, axis=-1)[0]
             
