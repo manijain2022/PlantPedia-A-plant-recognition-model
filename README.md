@@ -8,17 +8,27 @@
 
 ```
 PlantPedia/
-├── templates/
-│   ├── index.html     # Homepage with image upload
-│   ├── result.html    # Displays predicted plant and info
-│   └── about.html     # About section for PlantPedia
-├── uploads/           # Stores user-uploaded images temporarily
-├── app.py             # Flask backend to handle routing, model prediction
+├── website/                    # Flask app package
+│   ├── app.py                  # Main Flask application
+│   └── templates/              # HTML templates
+│       ├── index.html          # Homepage with upload form
+│       ├── result.html         # Displays prediction + info
+│       └── about.html          # About the project
+│
 ├── data/
-│   └── database.csv   # Plant data referenced in the result view
-├── model/
-│   └── E35_D5_LeakyRelu_0.0005_A94.h5  # Trained CNN model weights (download separately)
-└── requirements.txt    # Python packages needed
+│   └── database.csv            # Plant info referenced in results
+│
+├── models/
+│   └── E35_D5_LeakyRelu_0.0005_A94.h5  # Trained CNN model (rename for clarity)
+│
+├── training/
+│   └── leakyRelu_3dense_70_15_10.ipynb       # Jupyter notebook for training
+│
+├── .gitignore
+├── requirements.txt
+├── Procfile
+└── README.md
+
 ```
 
 ---
@@ -33,19 +43,14 @@ Make sure Python is installed. Then install Flask and other required packages:
 pip install -r requirements.txt
 ```
 
-### 2.💾 Download Model Weights
-Download the trained model weights file (E35_D5_LeakyRelu_0.0005_A94.h5) from
- https://drive.google.com/file/d/1AYaUN4QAskXZaN8kjv7Y92WjSgrUsCNC/view?usp=drive_link 
- and place it in the model/ directory. You might need to create the model/ directory if it doesn't exist.
-
-### 3. ▶️ Start the Flask Server
+### 2. ▶️ Start the Flask Server
 
 ```bash
 cd website
 python app.py
 ```
 
-### 4. 🌐 Open in Browser
+### 3. 🌐 Open in Browser
 
 Visit: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
@@ -63,8 +68,8 @@ Visit: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## 🔒 Deployment
 
-- This app is intended for **local use** or deployment on **Oracle VM**.
-- Not configured for Heroku or public cloud, but can be easily modified.
+- This app is intended for **local use** or deployment on **oracleVM**.
+- also configured for Heroku or public cloud,.
 
 ---
 
