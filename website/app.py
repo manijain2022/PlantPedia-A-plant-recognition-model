@@ -48,8 +48,8 @@ if not os.path.exists(app.config["UPLOAD_FOLDER"]):
 
 # Load the trained model
 
-MODEL_PATH = download_model_from_gdrive()
-model = load_model(MODEL_PATH)
+# MODEL_PATH = download_model_from_gdrive()
+# model = load_model(MODEL_PATH)
 
 
 
@@ -101,7 +101,7 @@ def upload_and_predict():
 
             # Process and predict the image
             preprocessed_image = preprocess_image(file_path)
-            # model = get_model()
+            model = get_model()
             predictions = model.predict(preprocessed_image)
             predicted_class_ind = np.argmax(predictions, axis=-1)[0]
             
